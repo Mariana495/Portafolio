@@ -9,4 +9,7 @@ En este proyecto se crearon varios sensores (uno físico y dos simulados) que mo
 * Diseño de tableros dinámicos con ayuda de Tableau.
 
 ## Multimedia
+![iotSensorFisico](https://github.com/Mariana495/Portafolio/assets/84542613/bd54b0ff-60ac-4b48-ad91-554a5fcd9240)
+Sensor físico
+
 
