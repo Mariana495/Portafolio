@@ -15,4 +15,6 @@ Sensor físico
 ![Diagrama de clases](https://github.com/Mariana495/Portafolio/assets/84542613/f8649f89-77f3-40f7-ad56-77da1c6e31ab)  
 Diagrama de Entidad-Relación del proyecto
 
+https://drive.google.com/file/d/1i0bABOzfO0vFX8iVEWDBHrzbnexTYvg4/view?usp=sharing  
+Video de explicación
 
