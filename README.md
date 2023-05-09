@@ -1,4 +1,4 @@
-# Portafolio
+# About me
 
 Mi nombre es Mariana Cortez de la Rosa, soy desarrolladora con enfoque al manejo de bases de datos. Actualmente me interesa desarrollarme en el área de ciencia de datos y analítica.
 
