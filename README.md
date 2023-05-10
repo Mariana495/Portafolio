@@ -6,6 +6,7 @@ Mi nombre es Mariana Cortez de la Rosa, soy desarrolladora con enfoque al manejo
 * Python
 * C++
 * R
+* JavaScript
 
 ## Herramientas
 **Desarrollo**
