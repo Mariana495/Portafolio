@@ -1,0 +1,117 @@
+---
+title: "Análisis exploratorio de datos utilizando R"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Se agrega la librería
+```{r}
+library(ggplot2)
+library(readxl)
+```
+
+## Cargamos nuestros archivos
+```{r}
+wines <- read_excel("wines.xlsx")
+show(wines)
+```
+
+## Para todas las variables cuantitativas obtén las siguientes métricas: media, mediana, rango, y desviación estándar.
+
+### MEDIA
+```{r}
+media = apply(wines, 2, mean)
+media
+```
+
+### MEDIANA
+```{r}
+mediana = apply(wines, 2, median)
+mediana
+```
+
+### RANGO
+```{r}
+rango = apply(wines, 2, range)
+rango
+```
+
+### DESVIACIÓN ESTANDAR
+```{r}
+DE = apply(wines, 2, sd)
+DE
+```
+
+## Para variables cualitativas, genera gráficas de barras o de pastel para mostrar la distribución de frecuencias. ¿Cuál es el valor que más se repite? ¿Cuántas veces se repite? ¿Qué porcentaje de veces se repite?
+
+### Gráfica de Barras
+
+```{r}
+barplot(table(wines$Cultivar), xlab = "Cultivar", ylab = "Frecuencia", main = "Frecuencia de cultivar")
+```
+
+### Gráfica de Pastel
+```{r}
+pie(table(wines$Cultivar), xlab = "Cultivar", ylab = "Frecuencia", main = "Frecuencia de cultivar")
+```
+
+## Para variables cuantitativas genera un diagrama de dispersión comparándolas (una en cada eje) y agrega una línea de regresión. ¿Cuál es la correlación entre las variables? ¿Es positiva o negativa? ¿Los datos se ajustan bien a la línea de regresión?
+
+```{r}
+plot(x = wines$Alcohol, y = wines$Ash, xlab = "Alcohol", ylab = "Ash", main = "Análisis datos Vinos", pch = 20, col = "green")
+```
+
+### Regresión Lineal
+```{r}
+summary(lm(Ash ~ Alcohol, wines))$coefficients
+```
+
+```{r}
+plot(x = wines$Alcohol, y = wines$Ash, xlab = "Alcohol", ylab = "Ash", main = "Análisis datos Vinos", pch = 20, col = "green")
+abline(a = 1.43712648, b = 0.07148817, col = "red", lty = 2, lwd = 2)
+text(x = 13, y = 3, labels = "y = 0.07148817x + 1.43712648")
+```
+
+### Correlación
+```{r}
+summary(lm(Ash ~ Alcohol, wines))$r.squared
+```
+
+La correlación es de 0.04475112, notese que esta muy alejada de 1. Con esto podemos definir que no es nada buena y por ende, nuestra línea no se ajusta a los datos.
+
+
+## Para un par de variable cuantitativa-cualitativa, y elabora un boxplot. Explica qué significan las partes del boxplot (son 5 partes). ¿Qué información me dan los boxplots? ¿Las distribuciones de valores en el eje "y" son los mismos para todas las categorías?
+
+
+```{r}
+bp = boxplot(Alcohol~Cultivar, data = wines, main = "Alcohol por Cultivar")
+```
+
+
+Límite inferior bigote: Es el extremo inferior del bigote, las observaciones por debajo de este límite se consideran atípicas.
+
+Q1: El valor medio entre el número más pequeño( no el “mínimo”) y la mediana del conjunto de datos.
+
+Mediana/q2: Este es el valor medio del conjunto de datos.
+
+Q3: El valor medio entre el número más alto( no el “máximo”) y la mediana del conjunto de datos.
+
+Límite superior bigote: Es el extremo superior del bigote, las observaciones por encima de este límite se consideran atípicas.
+
+## Escribe tus conclusiones. ¿Cuál es la información más importante que te dan los datos?
+
+En primer lugar, las variables cuantitativas nos dan una visión general de los datos que se manejan y nos dan una base para su posterior análisis. Al conocer la media, la mediana, el rango y la desviación estándar nos ayuda a comprender mejor los datos a trabajar y facilita la identificación de datos atípicos. 
+
+Con las gráficas de barras y pastel tenemos una referencia visual de la frecuencia en la que se cultivan cierto tipo de vinos. Además, si tuvieramos otra variable cualitativa que quisieramos comparar, sería posible analizarla con este tipo de gráficos. 
+
+Por otro lado, en el diagrama de dispersión se comparan los grados de alcohol del vino con el índice de ceniza que contiene. Este por si solo no demuestra una tendencia, por lo que al agregar la línea de tendencia podemos comprobar si las variables tienen un índice de correlación aceptable. Después de obtener este índice se concluyó que el modelo linear no era el más acertado para analizar la relación entre las variables. 
+
+Por último, con el diagrama de caja y bigotes podemos comparar los grados de alcohol dependiendo del vino cultivado.Se puede apreciar que los vinos del cultivo 1 tienen un índice de alcohol más alto que el de los otros, seguido por el cultivo 3 y al final el cultivo 2.  
+
+
